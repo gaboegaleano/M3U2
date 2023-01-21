@@ -26,6 +26,8 @@ app.use('/', indexRouter);
 app.use('/galeria', galeriaRouter);
 app.use('/contacto', contactoRouter);
 
+
+//Ejemplos de RUTA
 app.get('/prueba', function(req,res){
   res.send('Soy la Pagina de prueba')
 })
@@ -38,9 +40,22 @@ app.get('/servicios', function(req,res){
   res.send('Soy la Pagina de Servicios')  
 })
 
+/*Ejemplo de funcion de llamada individual puede manejar una ruta:
+app.get('/ejemplo/aa', function(rep, res){
+  res.send('Hello from A!')
+})*/
 
-/*
---EJEMPLO DE MANEJADOR DE RUT ENCADENABLE PARA VIA DE ACCESO DE RUTA USANDO app.rout()
+//Ejemplo con NEXT
+app.get('/ejemplo/b', function(rep, res, next){
+  console.log('The response will be sent by the next function...');
+  next();
+}, function(req, res){
+  res.send('Hello from B!'); 
+});
+
+
+
+/*--EJEMPLO DE MANEJADOR DE RUT ENCADENABLE PARA VIA DE ACCESO DE RUTA USANDO app.rout()
 app.route('/book')
   .get(function(req,res){
     res.send('Conseguí un libro al azar')
